@@ -12,7 +12,13 @@ ENV \
   TERRAFORM_VERSION=0.11.10 \
   TERRAFORM_SHA256SUM=43543a0e56e31b0952ea3623521917e060f2718ab06fe2b2d506cfaa14d54527
 
-RUN apk add --update --no-cache bash curl wget ca-certificates openssh git \
+RUN apk add --update --no-cache \
+    bash \
+    curl \
+    wget \
+    ca-certificates \
+    openssh \
+    git \
   && apk add --update --no-cache --virtual deps gettext tar gzip \
   && echo "Installing kubectl version ${KUBECTL_VERSION}" \
   && curl -f -L https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
