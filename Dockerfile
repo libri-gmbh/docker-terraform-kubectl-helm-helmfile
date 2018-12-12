@@ -19,6 +19,7 @@ RUN apk add --update --no-cache \
     wget \
     ca-certificates \
     openssh \
+    openssl \
     git \
   && apk add --update --no-cache --virtual deps gettext tar gzip \
   && echo "Installing kubectl version ${KUBECTL_VERSION}" \
