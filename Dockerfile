@@ -13,6 +13,7 @@ ENV \
   TERRAFORM_SHA256SUM=43543a0e56e31b0952ea3623521917e060f2718ab06fe2b2d506cfaa14d54527
 
 RUN apk add --update --no-cache \
+    jq \
     bash \
     curl \
     wget \
