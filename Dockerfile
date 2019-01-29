@@ -1,3 +1,13 @@
+FROM golang:alpine as builder
+
+WORKDIR /go/src/github.com/terraform-providers/terraform-provider-vault/
+
+RUN apk add --no-cache git make \
+  && mkdir -p /root/.terraform.d/plugins \
+  && git clone https://github.com/terraform-providers/terraform-provider-vault.git . \
+  && echo "Building terraform-provider-vault ..." \
+  && CGO_ENABLED=0 go build -a -ldflags '-s' -installsuffix cgo -o /root/.terraform.d/plugins/terraform-provider-vault .
+
 FROM alpine:3.8
 
 LABEL MAINTAINER="Alexander Pinnecke <alex@alexanderpinnecke.de>"
@@ -43,3 +53,7 @@ RUN apk add --update --no-cache \
     && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /bin \
     && rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
   && apk del --purge deps
+
+
+RUN mkdir -p /root/.terraform.d/plugins
+COPY --from=builder /root/.terraform.d/plugins /root/.terraform.d/plugins
