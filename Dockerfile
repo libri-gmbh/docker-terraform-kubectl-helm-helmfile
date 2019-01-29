@@ -6,7 +6,7 @@ RUN apk add --no-cache git make \
   && mkdir -p /root/.terraform.d/plugins \
   && git clone https://github.com/terraform-providers/terraform-provider-vault.git . \
   && echo "Building terraform-provider-vault ..." \
-  && CGO_ENABLED=0 go build -a -ldflags '-s' -installsuffix cgo -o /root/.terraform.d/plugins/terraform-provider-vault .
+  && CGO_ENABLED=0 go build -a -ldflags '-s' -installsuffix cgo -o /root/.terraform.d/plugins/linux_amd64/terraform-provider-vault_v1.5.0 .
 
 FROM alpine:3.8
 
